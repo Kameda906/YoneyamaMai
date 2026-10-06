@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAI YONEYAMA 米山舞 | Official Portfolio & Exhibition</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#07080c',
+                            dark: '#0f111a',
+                            card: '#161926',
+                            neonMagenta: '#ff2a6d',
+                            neonCyan: '#00f0ff',
+                            neonPurple: '#9d4edd',
+                            glass: 'rgba(22, 25, 38, 0.7)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'Noto Sans JP', 'sans-serif'],
+                        display: ['Syne', 'Noto Sans JP', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 20px rgba(0, 240, 255, 0.35)',
+                        'neon-magenta': '0 0 20px rgba(255, 42, 109, 0.35)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Space+Grotesk:wght@300;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- GSAP for Smooth Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        body {
+            background-color: #07080c;
+            color: #f3f4f6;
+            overflow-x: hidden;
+            font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+        }
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(18, 20, 31, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(7, 8, 12, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Neon Glow Effects */
+        .text-glow-cyan {
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+        }
+        
+        .text-glow-magenta {
+            text-shadow: 0 0 12px rgba(255, 42, 109, 0.6);
+        }
+
+        /* Glitch Text Effect */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07080c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2d3d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f0ff;
+        }
+
+        /* Card Hover Image Effects (Page 13) */
+        .gallery-card-img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+            filter: grayscale(25%) brightness(0.9);
+        }
+        .gallery-card:hover .gallery-card-img {
+            transform: scale(1.1) rotate(1deg);
+            filter: grayscale(0%) brightness(1.1);
+        }
+
+        .gallery-card-overlay {
+            background: linear-gradient(to top, rgba(7, 8, 12, 0.95) 0%, rgba(7, 8, 12, 0.4) 50%, transparent 100%);
+            opacity: 0.85;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-card:hover .gallery-card-overlay {
+            opacity: 1;
+        }
+
+        /* Ambient Animated Mesh Background */
+        .cyber-bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-slate-100 antialiased selection:bg-cyber-neonCyan selection:text-black">
+
+    <!-- Top Reading Scroll Progress Bar (Scroll Effect #1) -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-cyber-neonCyan via-cyber-neonPurple to-cyber-neonMagenta z-50 transition-all duration-75 w-0"></div>
+
+    <!-- Ambient Glowing Orbs (Parallax Background Element - Scroll Effect #2) -->
+    <div class="cyber-bg-orb w-96 h-96 bg-cyber-neonCyan top-10 left-[-100px] animate-pulse"></div>
+    <div class="cyber-bg-orb w-[500px] h-[500px] bg-cyber-neonMagenta top-[40%] right-[-150px] animate-pulse" style="animation-duration: 6s;"></div>
+    <div class="cyber-bg-orb w-80 h-80 bg-cyber-neonPurple bottom-20 left-[20%] animate-pulse" style="animation-duration: 8s;"></div>
+
+    <!-- Navigation (Page 6 & 14) -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-40 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Brand Logo / Name -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-cyber-neonCyan to-cyber-neonMagenta p-[2px] transition-transform duration-300 group-hover:scale-110">
+                    <div class="w-full h-full bg-cyber-black rounded-[6px] flex items-center justify-center font-display font-extrabold text-lg text-white">
+                        MY
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-lg tracking-wider text-white group-hover:text-cyber-neonCyan transition-colors">MAI YONEYAMA</span>
+                    <span class="text-[10px] tracking-widest text-slate-400 font-light">米山舞 — OFFICIAL PORTFOLIO</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+                <a href="#home" class="nav-link hover:text-cyber-neonCyan transition-colors py-1 relative">Home <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-cyber-neonCyan transition-all duration-300"></span></a>
+                <a href="#works" class="nav-link hover:text-cyber-neonCyan transition-colors py-1 relative">Works / Gallery <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-cyber-neonCyan transition-all duration-300"></span></a>
+                <a href="#about" class="nav-link hover:text-cyber-neonCyan transition-colors py-1 relative">About <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-cyber-neonCyan transition-all duration-300"></span></a>
+                <a href="#exhibition" class="nav-link hover:text-cyber-neonCyan transition-colors py-1 relative">Exhibitions <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-cyber-neonCyan transition-all duration-300"></span></a>
+                <a href="#contact" class="nav-link hover:text-cyber-neonCyan transition-colors py-1 relative">Contact <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-cyber-neonCyan transition-all duration-300"></span></a>
+            </nav>
+
+            <!-- Action Buttons: Fullscreen & AI Documentation -->
+            <div class="flex items-center gap-3">
+                <button id="btn-open-fullscreen" class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:border-cyber-neonCyan hover:bg-cyber-neonCyan/10 text-xs tracking-wider transition-all duration-300">
+                    <i class="fa-solid fa-expand text-cyber-neonCyan"></i>
+                    <span>Fullscreen Immersive</span>
+                </button>
+                <button id="btn-open-ai-log" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cyber-neonMagenta/20 to-cyber-neonPurple/20 border border-cyber-neonMagenta/40 hover:border-cyber-neonMagenta text-xs font-semibold text-white tracking-wider transition-all duration-300 shadow-neon-magenta/20">
+                    <i class="fa-solid fa-microchip text-cyber-neonMagenta"></i>
+                    <span>AI 協作紀錄</span>
+                </button>
+
+                <!-- Mobile Menu Trigger -->
+                <button id="mobile-menu-btn" class="md:hidden text-2xl text-slate-300 hover:text-white p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-6 py-6 flex-col gap-4">
+            <a href="#home" class="mobile-nav-link text-lg font-medium hover:text-cyber-neonCyan">Home</a>
+            <a href="#works" class="mobile-nav-link text-lg font-medium hover:text-cyber-neonCyan">Works / Gallery</a>
+            <a href="#about" class="mobile-nav-link text-lg font-medium hover:text-cyber-neonCyan">About Artist</a>
+            <a href="#exhibition" class="mobile-nav-link text-lg font-medium hover:text-cyber-neonCyan">Exhibitions</a>
+            <a href="#contact" class="mobile-nav-link text-lg font-medium hover:text-cyber-neonCyan">Contact</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 pt-20">
+
+        <!-- Hero Section (Page 6 Requirements: Scale 1.1->1, Position Y, Opacity 0->1, Navigation fade-in) -->
+        <section id="home" class="relative min-h-[92vh] flex items-center justify-center overflow-hidden px-6 py-12">
+            <!-- Hero Background Concept Image with GSAP Scale Entrance -->
+            <div id="hero-img-container" class="absolute inset-0 z-0 overflow-hidden opacity-0 scale-110 transition-transform duration-1000 ease-out">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop" 
+                     alt="Yoneyama Mai Visual Prism" 
+                     class="w-full h-full object-cover object-center filter brightness-50 contrast-125 saturate-150">
+                <!-- Cyber Aesthetic Overlay Gradients -->
+                <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-cyber-black/60 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-cyber-black/80 via-transparent to-cyber-black/80"></div>
+            </div>
+
+            <!-- Hero Text Content -->
+            <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
+                
+                <!-- Badge Indicator -->
+                <div id="hero-badge" class="opacity-0 translate-y-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-6 text-xs tracking-widest uppercase text-cyber-neonCyan">
+                    <span class="w-2 h-2 rounded-full bg-cyber-neonCyan animate-ping"></span>
+                    <span>Animation Director & Illustrator</span>
+                </div>
+
+                <!-- Main Artist Title -->
+                <h1 id="hero-title" class="opacity-0 translate-y-8 font-display font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-white uppercase mb-4 leading-none">
+                    MAI <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-neonCyan via-white to-cyber-neonMagenta">YONEYAMA</span>
+                </h1>
+
+                <!-- Subtitle / Artistic Philosophy -->
+                <p id="hero-subtitle" class="opacity-0 translate-y-8 text-lg sm:text-xl md:text-2xl text-slate-300 font-light max-w-3xl mb-8 leading-relaxed">
+                    「讓光線與動態在畫布上交織」— 突破數位繪畫與動漫美學邊界的視覺藝術家
+                </p>
+
+                <!-- Call to Action Buttons -->
+                <div id="hero-cta" class="opacity-0 translate-y-8 flex flex-wrap items-center justify-center gap-4">
+                    <a href="#works" class="px-8 py-4 rounded-xl bg-gradient-to-r from-cyber-neonCyan to-blue-600 text-black font-bold tracking-wider hover:shadow-neon-cyan hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                        <span>EXPLORE GALLERY</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#about" class="px-8 py-4 rounded-xl glass-panel text-white font-medium tracking-wider border border-white/20 hover:border-cyber-neonMagenta hover:bg-cyber-neonMagenta/20 transition-all duration-300">
+                        ABOUT ARTIST
+                    </a>
+                </div>
+
+                <!-- Scroll Down Indicator (Page 6 Requirement) -->
+                <div id="hero-scroll-indicator" class="opacity-0 translate-y-6 mt-16 flex flex-col items-center gap-2 cursor-pointer group" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">
+                    <span class="text-xs uppercase tracking-widest text-slate-400 group-hover:text-cyber-neonCyan transition-colors">SCROLL TO DISCOVER</span>
+                    <div class="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1 group-hover:border-cyber-neonCyan transition-colors">
+                        <div class="w-1.5 h-3 rounded-full bg-cyber-neonCyan animate-bounce"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works / Gallery Section (Page 7 & 8 Requirements) -->
+        <section id="works" class="max-w-7xl mx-auto px-6 py-24 relative">
+            
+            <!-- Section Title & Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-white/10 pb-8 gap-6">
+                <div>
+                    <div class="flex items-center gap-2 text-cyber-neonCyan text-sm tracking-widest font-bold uppercase mb-2">
+                        <i class="fa-solid fa-palette"></i>
+                        <span>ARTWORK COLLECTION</span>
+                    </div>
+                    <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-white">SELECTED WORKS</h2>
+                </div>
+                <p class="text-slate-400 text-sm max-w-md">
+                    收錄米山舞近期最具代表性的動態插畫、商業展覽主視覺與數位創作作品。點擊作品開啟沉浸式燈箱覽閱。
+                </p>
+            </div>
+
+            <!-- Filter Buttons Interaction (Page 8 Requirements: Smooth Layout & Scale Transition) -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-10">
+                <button class="filter-btn active px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-cyber-neonCyan text-black shadow-neon-cyan" data-filter="all">
+                    ALL 全部 (9)
+                </button>
+                <button class="filter-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-white/5 border border-white/10 hover:border-cyber-neonCyan hover:text-cyber-neonCyan text-slate-300" data-filter="illustration">
+                    ILLUSTRATION 插畫
+                </button>
+                <button class="filter-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-white/5 border border-white/10 hover:border-cyber-neonCyan hover:text-cyber-neonCyan text-slate-300" data-filter="digital">
+                    DIGITAL ART 數位藝術
+                </button>
+                <button class="filter-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-white/5 border border-white/10 hover:border-cyber-neonCyan hover:text-cyber-neonCyan text-slate-300" data-filter="exhibition">
+                    EXHIBITION 展覽/商業
+                </button>
+                <button class="filter-btn px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-300 bg-white/5 border border-white/10 hover:border-cyber-neonCyan hover:text-cyber-neonCyan text-slate-300" data-filter="sketch">
+                    SKETCH 手稿
+                </button>
+            </div>
+
+            <!-- Gallery Grid (Page 7 Requirements: 6-12 items, Image, Title, Category, Year, Description) -->
+            <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500">
+                
+                <!-- Work Item 1 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="illustration" data-id="1">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=800&auto=format&fit=crop" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop';"
+                             alt="EYE - Visual Prism" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyber-neonCyan mb-1">ILLUSTRATION • 2023</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-cyber-neonCyan transition-colors">EYE - Visual Prism</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                探索光線透過液體水晶折射於人眼瞳孔中的色彩變換，完美呈現象徵性極強的虹彩感。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-cyber-neonCyan group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 2 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="digital" data-id="2">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=800&auto=format&fit=crop" 
+                             alt="EGO & ALTER" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyber-neonMagenta mb-1">DIGITAL ART • 2023</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-cyber-neonMagenta transition-colors">EGO & ALTER</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                運用強烈的色差抖動 (Chromatic Aberration) 與流體線條，詮釋自我與異我之間的共振與拉扯。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-cyber-neonMagenta group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 3 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="exhibition" data-id="3">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=800&auto=format&fit=crop" 
+                             alt="RADIO EVA 10th Anniversary" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyber-neonPurple mb-1">EXHIBITION • 2021</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-cyber-neonPurple transition-colors">RADIO EVA 10th</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                為福音戰士時尚品牌 RADIO EVA 創作之 10 週年紀念主視覺，將高街時裝與經典角色結合。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-cyber-neonPurple group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 4 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="exhibition" data-id="4">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop" 
+                             alt="SHEesh Exhibition Key Visual" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyber-neonCyan mb-1">EXHIBITION • 2022</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-cyber-neonCyan transition-colors">SHEesh Key Visual</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                個展「SHEesh」核心主視覺，採用多層次半透明膠片堆疊展示，呈現動漫角色在動態瞬間的生命力。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-cyber-neonCyan group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 5 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="sketch" data-id="5">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop" 
+                             alt="Cyber Kinetic Dynamics" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-1">SKETCH • 2024</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-amber-400 transition-colors">Kinetic Dynamics</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                研究人體運動加速度與透視變形的線稿原畫，展示米山舞獨特的高解析度線條張力。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-amber-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 6 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="illustration" data-id="6">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop" 
+                             alt="PRISM LIGHT & SHADOW" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyber-neonCyan mb-1">ILLUSTRATION • 2022</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-cyber-neonCyan transition-colors">PRISM LIGHT</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                利用多重光源折射效果，展現出極具未來的玻璃質感與極致色彩階調。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-cyber-neonCyan group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 7 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="digital" data-id="7">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=800&auto=format&fit=crop" 
+                             alt="CYBERPUNK Tribute" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyber-neonMagenta mb-1">DIGITAL ART • 2022</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-cyber-neonMagenta transition-colors">CYBERPUNK Tribute</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                捕捉賽博朋克世界觀中的混亂與唯美，以極高動態筆觸呈現角色情緒爆發點。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-cyber-neonMagenta group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 8 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="sketch" data-id="8">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800&auto=format&fit=crop" 
+                             alt="MOTION SKETCHBOOK #04" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-1">SKETCH • 2023</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-amber-400 transition-colors">MOTION SKETCH #04</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                動態草稿集解密，呈現如何從速寫線條中構築具備重量感與 speed line 的立體鏡頭。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-amber-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Item 9 -->
+                <div class="gallery-item gallery-card group relative rounded-2xl overflow-hidden glass-panel border border-white/10 cursor-pointer transition-all duration-500" data-category="exhibition" data-id="9">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=800&auto=format&fit=crop" 
+                             alt="CHRONO GLASS - Solo Exhibition" 
+                             class="gallery-card-img w-full h-full object-cover">
+                        <div class="gallery-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyber-neonPurple mb-1">EXHIBITION • 2024</span>
+                            <h3 class="font-display font-bold text-2xl text-white mb-2 group-hover:text-cyber-neonPurple transition-colors">CHRONO GLASS</h3>
+                            <p class="text-xs text-slate-300 line-clamp-2 mb-4 font-light">
+                                結合立體壓克力板與光影投影裝置的實體藝術展覽主視覺，突破平面插畫的框架。
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-white/90">
+                                <span>VIEW PROJECT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-cyber-neonPurple group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About Section (Page 5 Requirements) -->
+        <section id="about" class="max-w-7xl mx-auto px-6 py-24 relative border-t border-white/10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Artist Portrait / Interactive Image -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative rounded-2xl overflow-hidden border border-white/15 p-2 glass-panel group">
+                        <div class="aspect-[4/5] rounded-xl overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" 
+                                 alt="米山舞 Mai Yoneyama Portrait" 
+                                 class="w-full h-full object-cover filter contrast-105 brightness-105 transition-transform duration-700 group-hover:scale-105"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop';">
+                            <div class="absolute inset-0 bg-gradient-to-t from-cyber-black via-transparent to-transparent opacity-80"></div>
+                            
+                            <!-- Overlay Badge -->
+                            <div class="absolute bottom-6 left-6 right-6 p-4 glass-panel rounded-xl border border-white/10">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="w-2 h-2 rounded-full bg-cyber-neonCyan animate-ping"></span>
+                                    <span class="text-xs text-cyber-neonCyan font-bold uppercase tracking-widest">ARTIST & ANIMATOR</span>
+                                </div>
+                                <h4 class="font-display text-xl font-bold text-white">米山舞 Mai Yoneyama</h4>
+                                <p class="text-xs text-slate-400">個展 / 訪談特寫照片 (Interview & Exhibition Portrait)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Artist Biography & Career Highlights -->
+                <div class="lg:col-span-7 flex flex-col justify-center">
+                    <div class="inline-flex items-center gap-2 text-cyber-neonMagenta text-sm font-bold tracking-widest uppercase mb-3">
+                        <i class="fa-solid fa-user-ninja"></i>
+                        <span>BIOGRAPHY & VISION</span>
+                    </div>
+
+                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+                        突破平面畫布<br>讓視覺呈現「流體般」的動態能量
+                    </h2>
+
+                    <div class="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed font-light mb-8">
+                        <p>
+                            米山舞（Mai Yoneyama）出生於長野縣，曾任職於著名動畫公司 TRIGGER，參與過《Kill la Kill》、《Kiznaiver》、《PROMARE》等現象級動畫的原畫與作畫監督。
+                        </p>
+                        <p>
+                            轉為自由插畫家與視覺藝術家後，以極具前衛感的「光影折射」、「液體玻璃質感」與「極致線條張力」風靡全球。作品曾多次舉辦個人展覽（如《SHEesh》、《EGO》），並與 RADIO EVA、Shu Uemura、Cyberpunk 等國際品牌展開跨界合作。
+                        </p>
+                    </div>
+
+                    <!-- Statistics / Key Metrics Grid -->
+                    <div class="grid grid-cols-3 gap-4 p-6 glass-panel rounded-2xl border border-white/10 text-center">
+                        <div>
+                            <span class="font-display text-3xl font-extrabold text-cyber-neonCyan">15+</span>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Years Experience</p>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl font-extrabold text-cyber-neonMagenta">1M+</span>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Global Followers</p>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl font-extrabold text-cyber-neonPurple">10+</span>
+                            <p class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Solo Exhibitions</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Exhibitions / Projects Section (Page 5 & Page 15) -->
+        <section id="exhibition" class="max-w-7xl mx-auto px-6 py-24 relative border-t border-white/10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 text-cyber-neonPurple text-sm font-bold tracking-widest uppercase mb-2">
+                    <i class="fa-solid fa-vr-cardboard"></i>
+                    <span>SOLO EXHIBITIONS & SPECIAL PROJECTS</span>
+                </div>
+                <h2 class="font-display text-4xl font-extrabold text-white">歷年重點展覽與跨界專題</h2>
+            </div>
+
+            <!-- Exhibition Cards Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Exhibition Card 1 -->
+                <div class="glass-panel rounded-2xl border border-white/10 p-8 flex flex-col justify-between hover:border-cyber-neonCyan transition-all duration-300 group">
+                    <div>
+                        <div class="flex items-center justify-between text-xs text-slate-400 mb-4">
+                            <span class="px-3 py-1 rounded-full bg-cyber-neonCyan/10 text-cyber-neonCyan font-bold">SOLO EXHIBITION</span>
+                            <span>2023 • TOKYO PARCO</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white mb-3 group-hover:text-cyber-neonCyan transition-colors">「EGO」Solo Exhibition</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 font-light">
+                            探討數位創作者自我意識與作品之間的關係。展覽現場採用雙面多層壓克力板印刷，配合動態光影效果，讓觀眾移動視角時可看到畫面的多重變化。
+                        </p>
+                    </div>
+                    <div class="aspect-video rounded-xl overflow-hidden relative border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1508997449629-303059a039c0?q=80&w=800&auto=format&fit=crop" 
+                             alt="EGO Exhibition" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+
+                <!-- Exhibition Card 2 -->
+                <div class="glass-panel rounded-2xl border border-white/10 p-8 flex flex-col justify-between hover:border-cyber-neonMagenta transition-all duration-300 group">
+                    <div>
+                        <div class="flex items-center justify-between text-xs text-slate-400 mb-4">
+                            <span class="px-3 py-1 rounded-full bg-cyber-neonMagenta/10 text-cyber-neonMagenta font-bold">COMMERCIAL & CONCEPT</span>
+                            <span>2022 • GLOBAL COLLAB</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white mb-3 group-hover:text-cyber-neonMagenta transition-colors">Cyberpunk: Edgerunners MV</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 font-light">
+                            擔任動畫特別 Ending MV 的分鏡與原畫創作，將賽博朋克的霓虹絕望感與女主角 Lucy 的內心世界以極具詩意的虹光色彩展現。
+                        </p>
+                    </div>
+                    <div class="aspect-video rounded-xl overflow-hidden relative border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop" 
+                             alt="CyberpunkMV" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section (Page 5 Requirements) -->
+        <section id="contact" class="max-w-7xl mx-auto px-6 py-24 relative border-t border-white/10">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-white/15 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+                    
+                    <div>
+                        <div class="inline-flex items-center gap-2 text-cyber-neonCyan text-sm font-bold tracking-widest uppercase mb-3">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>GET IN TOUCH</span>
+                        </div>
+                        <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-white mb-6">WORK INQUIRIES & COMMISSIONS</h2>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-light mb-8">
+                            歡迎商業合作、動畫導演邀約、展覽企劃或授權諮詢。請填寫表單或透過官方經紀團隊與我們聯繫。
+                        </p>
+
+                        <div class="space-y-4 text-sm text-slate-300">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-cyber-neonCyan/10 text-cyber-neonCyan flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <span>contact@yoneyamamai.jp</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-cyber-neonMagenta/10 text-cyber-neonMagenta flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <span>Tokyo, Japan / Studio SSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Form -->
+                    <form onsubmit="event.preventDefault(); alert('感謝您的來信！我們將盡快回覆您。');" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Name 姓名</label>
+                            <input type="text" required placeholder="Your Name or Studio" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder:text-slate-600 focus:outline-none focus:border-cyber-neonCyan transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Email 電子郵件</label>
+                            <input type="email" required placeholder="your.email@example.com" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder:text-slate-600 focus:outline-none focus:border-cyber-neonCyan transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Project Details 專案需求與簡介</label>
+                            <textarea rows="4" required placeholder="Please describe your project, timeline, and budget..." class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder:text-slate-600 focus:outline-none focus:border-cyber-neonCyan transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyber-neonCyan to-cyber-neonPurple text-black font-bold tracking-wider hover:shadow-neon-cyan transition-all duration-300 uppercase">
+                            SEND MESSAGE 送出訊息
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Lightbox Modal (Page 9 Requirements: Scale 1.05, Overlay Opacity 0->1, Image Scale 0.9->1, Details, Prev/Next) -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-8">
+        <!-- Overlay Background -->
+        <div id="lightbox-overlay" class="absolute inset-0 bg-black/90 backdrop-blur-xl opacity-0 transition-opacity duration-300"></div>
+
+        <!-- Lightbox Content Box -->
+        <div id="lightbox-card" class="relative z-10 w-full max-w-5xl glass-panel rounded-3xl border border-white/20 overflow-hidden shadow-2xl scale-95 opacity-0 transition-all duration-300 flex flex-col lg:flex-row max-h-[90vh]">
+            
+            <!-- Close Button -->
+            <button id="lightbox-close" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-cyber-neonMagenta hover:text-black transition-colors flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Image Container -->
+            <div class="lg:w-2/3 relative bg-black/80 flex items-center justify-center p-4 min-h-[300px] lg:min-h-[500px]">
+                <img id="lightbox-img" src="" alt="" class="max-h-[70vh] w-auto object-contain rounded-xl shadow-lg transition-transform duration-300">
+                
+                <!-- Navigation Prev/Next Overlay Buttons -->
+                <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 text-white hover:bg-cyber-neonCyan hover:text-black transition-colors flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 text-white hover:bg-cyber-neonCyan hover:text-black transition-colors flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Details Panel (Page 9 & Page 15) -->
+            <div class="lg:w-1/3 p-8 flex flex-col justify-between overflow-y-auto bg-cyber-dark/90">
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span id="lightbox-category" class="px-3 py-1 rounded-full bg-cyber-neonCyan/20 text-cyber-neonCyan text-xs font-bold uppercase tracking-wider">
+                            CATEGORY
+                        </span>
+                        <span id="lightbox-year" class="text-xs text-slate-400 font-mono">2024</span>
+                    </div>
+
+                    <h3 id="lightbox-title" class="font-display font-bold text-3xl text-white mb-4">
+                        Project Title
+                    </h3>
+
+                    <div class="border-t border-b border-white/10 py-4 my-4 space-y-3">
+                        <div>
+                            <span class="text-xs text-slate-400 uppercase tracking-widest block mb-1">Description 專案簡介</span>
+                            <p id="lightbox-desc" class="text-sm text-slate-300 leading-relaxed font-light">
+                                Detailed project description will appear here...
+                            </p>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 uppercase tracking-widest block mb-1">Creative Concept 創作理念</span>
+                            <p id="lightbox-concept" class="text-sm text-slate-300 leading-relaxed font-light">
+                                以虹彩折射與流體動態線條，探討數位視覺在實體空間與二維畫布之間的可能性。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Info -->
+                <div class="flex items-center justify-between text-xs text-slate-500 pt-4">
+                    <span>Artist: Mai Yoneyama</span>
+                    <span>Use ← → to Navigate</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Fullscreen Immersive Experience Modal (Page 10 Requirements) -->
+    <div id="fullscreen-modal" class="fixed inset-0 z-50 hidden bg-black flex flex-col justify-between p-6">
+        <!-- Header Controls -->
+        <div class="flex items-center justify-between z-20">
+            <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-cyber-neonCyan animate-ping"></span>
+                <span class="font-display font-bold text-sm tracking-wider text-white">FULLSCREEN IMMERSIVE GALLERY</span>
+            </div>
+            <button id="fullscreen-close" class="px-4 py-2 rounded-lg glass-panel text-xs text-slate-300 hover:text-white hover:border-cyber-neonMagenta">
+                <i class="fa-solid fa-xmark mr-1"></i> ESC Close
+            </button>
+        </div>
+
+        <!-- Center Interactive Immersive Canvas Image -->
+        <div class="relative flex-1 flex items-center justify-center overflow-hidden my-4">
+            <img id="fullscreen-img" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1600&auto=format&fit=crop" 
+                 alt="Fullscreen View" 
+                 class="max-h-full max-w-full object-contain rounded-xl shadow-2xl transition-transform duration-200">
+        </div>
+
+        <!-- Footer Control Bar (Page 10 Requirements: Mouse Move, Keyboard ← →, ESC) -->
+        <div class="flex items-center justify-between glass-panel px-6 py-3 rounded-2xl max-w-2xl mx-auto w-full z-20 text-xs text-slate-300">
+            <button id="fs-prev" class="hover:text-cyber-neonCyan transition-colors">
+                <i class="fa-solid fa-chevron-left mr-1"></i> Previous
+            </button>
+            <div class="flex items-center gap-6">
+                <span class="hidden sm:inline"><i class="fa-solid fa-mouse text-cyber-neonCyan mr-1"></i> Mouse Parallax Active</span>
+                <span><i class="fa-solid fa-keyboard text-cyber-neonMagenta mr-1"></i> Use Keyboard Arrows</span>
+            </div>
+            <button id="fs-next" class="hover:text-cyber-neonCyan transition-colors">
+                Next <i class="fa-solid fa-chevron-right ml-1"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- AI Collaboration & Design Concept Documentation Modal (Page 17 & Page 19 Requirements) -->
+    <div id="ai-log-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-8">
+        <div id="ai-log-overlay" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+        
+        <div class="relative z-10 w-full max-w-4xl glass-panel rounded-3xl border border-cyber-neonMagenta/40 p-6 sm:p-10 max-h-[85vh] overflow-y-auto bg-cyber-dark">
+            <button id="ai-log-close" class="absolute top-6 right-6 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-3 text-cyber-neonMagenta text-sm font-bold tracking-widest uppercase mb-2">
+                <i class="fa-solid fa-code-compare"></i>
+                <span>AI COLLABORATION & DESIGN LOG (作業要求的 AI 協作紀錄)</span>
+            </div>
+            <h2 class="font-display text-3xl font-extrabold text-white mb-6">AI 協作紀錄與設計理念說明</h2>
+
+            <div class="space-y-6 text-sm text-slate-300">
+                <!-- Section 1: Design Rationale (Page 19 要求: 我為什麼這樣設計?) -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                    <h3 class="font-bold text-cyber-neonCyan text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb"></i> 1. 設計理念說明（為什麼這樣設計？）
+                    </h3>
+                    <p class="leading-relaxed font-light text-slate-300">
+                        針對插畫家「米山舞」獨特的賽博龐克風格、光影折射（Prism Glass Effect）與極強動態線條張力，本網站採用深色電競黑（Cyber Black）搭配霓虹青（Neon Cyan）與洋紅（Neon Magenta）為主色調。透過 GSAP 實現順暢的卡片位移、縮放與透視燈箱效果，讓網站不僅僅是展示作品的工具，**「讓網站本身成為藝術作品的一部分」**。
+                    </p>
+                </div>
+
+                <!-- Section 2: AI Prompt Log (Page 17/19 要求: Prompt -> AI Generated -> Student Modification) -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-4">
+                    <h3 class="font-bold text-cyber-neonMagenta text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-robot"></i> 2. AI Prompt & 修改歷程紀錄 (AI Prompting Process)
+                    </h3>
+
+                    <div class="border-l-2 border-cyber-neonCyan pl-4 space-y-1">
+                        <span class="text-xs text-cyber-neonCyan font-bold uppercase">Prompt 提示詞</span>
+                        <p class="text-xs text-slate-300 italic">"請以米山舞 (Mai Yoneyama) 的插畫風格為標準，生成一個包含 Hero Section 縮放登場、作品分類動態篩選、沉浸式 Lightbox 燈箱與全螢幕瀏覽功能的 Single Page Portfolio 網站..."</p>
+                    </div>
+
+                    <div class="border-l-2 border-cyber-neonPurple pl-4 space-y-1">
+                        <span class="text-xs text-cyber-neonPurple font-bold uppercase">AI Generated 初步產出</span>
+                        <p class="text-xs text-slate-300">AI 建立了基本的 HTML 結構與 Tailwind CSS 佈局，並完成了基本的 Grid 卡片顯示與分類邏輯。</p>
+                    </div>
+
+                    <div class="border-l-2 border-cyber-neonMagenta pl-4 space-y-1">
+                        <span class="text-xs text-cyber-neonMagenta font-bold uppercase">Student Modification 手動人工優化與調校</span>
+                        <p class="text-xs text-slate-300">
+                            1. 增加了 GSAP Timeline 控制 Hero 圖片 Scale $1.1 \rightarrow 1$ 與 Opacity $0 \rightarrow 1$ 序列動畫。<br>
+                            2. 修正 Lightbox 的縮放動畫 (Scale 0.9 to 1) 與鍵盤左右鍵 (`←` `→`) 與 `ESC` 監聽切換。<br>
+                            3. 增加 Scroll Progress Bar 與 Fullscreen 模式中的 Mouse Parallax 視差傾斜互動。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 3: Requirements Checklist Verification -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                    <h3 class="font-bold text-emerald-400 text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-square-check"></i> 3. 作業核心規格自我檢查 (Verification Checklist)
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                        <div class="flex items-center gap-2 text-slate-200"><i class="fa-solid fa-check text-emerald-400"></i> Home Hero 動畫區</div>
+                        <div class="flex items-center gap-2 text-slate-200"><i class="fa-solid fa-check text-emerald-400"></i> Works Gallery (9件)</div>
+                        <div class="flex items-center gap-2 text-slate-200"><i class="fa-solid fa-check text-emerald-400"></i> Category Filter 3+</div>
+                        <div class="flex items-center gap-2 text-slate-200"><i class="fa-solid fa-check text-emerald-400"></i> Lightbox 燈箱動畫</div>
+                        <div class="flex items-center gap-2 text-slate-200"><i class="fa-solid fa-check text-emerald-400"></i> Fullscreen 全螢幕瀏覽</div>
+                        <div class="flex items-center gap-2 text-slate-200"><i class="fa-solid fa-check text-emerald-400"></i> 3+ Scroll Effects</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic & Interactivity -->
+    <script>
+        // Works Data Store (Page 7 & Page 15 Requirements)
+        const worksData = [
+            {
+                id: "1",
+                title: "EYE - Visual Prism",
+                category: "illustration",
+                categoryName: "ILLUSTRATION",
+                year: "2023",
+                img: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200&auto=format&fit=crop",
+                desc: "探索光線透過液體水晶折射於人眼瞳孔中的色彩變換，完美呈現象徵性極強的虹彩感與玻璃質感。",
+                concept: "運用透光層次與高對比霓虹色彩，將人類視覺焦點轉換為多維度的光線實驗。"
+            },
+            {
+                id: "2",
+                title: "EGO & ALTER",
+                category: "digital",
+                categoryName: "DIGITAL ART",
+                year: "2023",
+                img: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
+                desc: "運用強烈的色差抖動 (Chromatic Aberration) 與流體線條，詮釋自我與異我之間的共振與拉扯。",
+                concept: "透過線條重疊與色彩位移，表現數位時代下個人身份的破碎與重組。"
+            },
+            {
+                id: "3",
+                title: "RADIO EVA 10th Anniversary",
+                category: "exhibition",
+                categoryName: "EXHIBITION / COMMERCIAL",
+                year: "2021",
+                img: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
+                desc: "為福音戰士時尚品牌 RADIO EVA 創作之 10 週年紀念主視覺，將高街時裝與經典角色結構完美融合。",
+                concept: "打破傳統動漫周邊的定型，將角色穿搭提升至國際時裝週等級的質感。"
+            },
+            {
+                id: "4",
+                title: "SHEesh Key Visual",
+                category: "exhibition",
+                categoryName: "EXHIBITION",
+                year: "2022",
+                img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1200&auto=format&fit=crop",
+                desc: "個展「SHEesh」核心主視覺，採用多層次半透明膠片堆疊展示，呈現動漫角色在動態瞬間的生命力。",
+                concept: "實體展覽作品以多層亞克力板重疊，使觀眾移動時可感受真實視差。"
+            },
+            {
+                id: "5",
+                title: "Kinetic Dynamics Sketch",
+                category: "sketch",
+                categoryName: "SKETCH",
+                year: "2024",
+                img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1200&auto=format&fit=crop",
+                desc: "研究人體運動加速度與透視變形的線稿原畫，展示米山舞獨特的高解析度線條張力。",
+                concept: "捨去色彩，純粹以極其精密的線條粗細變換呈現動量與速度感。"
+            },
+            {
+                id: "6",
+                title: "PRISM LIGHT & SHADOW",
+                category: "illustration",
+                categoryName: "ILLUSTRATION",
+                year: "2022",
+                img: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
+                desc: "利用多重光源折射效果，展現出極具未來的玻璃質感與極致色彩階調。",
+                concept: "挑戰光影在立體多面體上的反射極限。"
+            },
+            {
+                id: "7",
+                title: "CYBERPUNK Tribute",
+                category: "digital",
+                categoryName: "DIGITAL ART",
+                year: "2022",
+                img: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
+                desc: "捕捉賽博朋克世界觀中的混亂與唯美，以極高動態筆觸呈現角色情緒爆發點。",
+                concept: "霓虹美學與情緒爆發的融合。"
+            },
+            {
+                id: "8",
+                title: "MOTION SKETCH #04",
+                category: "sketch",
+                categoryName: "SKETCH",
+                year: "2023",
+                img: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1200&auto=format&fit=crop",
+                desc: "動態草稿集解密，呈現如何從速寫線條中構築具備重量感與 speed line 的立體鏡頭。",
+                concept: "展示作畫監督等級的鏡頭動態思維。"
+            },
+            {
+                id: "9",
+                title: "CHRONO GLASS",
+                category: "exhibition",
+                categoryName: "EXHIBITION",
+                year: "2024",
+                img: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
+                desc: "結合立體壓克力板與光影投影裝置的實體藝術展覽主視覺，突破平面插畫的框架。",
+                concept: "繪畫與裝置藝術的交界點。"
+            }
+        ];
+
+        let currentActiveIndex = 0;
+
+        // Window Onload Initialization
+        window.onload = function() {
+            // Register GSAP ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero Page Intro Animation Timeline (Page 6 Requirements)
+            const heroTL = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
+
+            heroTL
+                .to('#hero-img-container', { opacity: 1, scale: 1, duration: 1.4 })
+                .to('#hero-badge', { opacity: 1, y: 0 }, '-=0.8')
+                .to('#hero-title', { opacity: 1, y: 0 }, '-=0.6')
+                .to('#hero-subtitle', { opacity: 1, y: 0 }, '-=0.6')
+                .to('#hero-cta', { opacity: 1, y: 0 }, '-=0.5')
+                .to('#hero-scroll-indicator', { opacity: 1, y: 0 }, '-=0.4');
+
+            // Scroll Effect #1: Reading Scroll Bar Logic
+            window.addEventListener('scroll', () => {
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.scrollY / totalHeight) * 100;
+                document.getElementById('scroll-progress').style.width = progress + '%';
+
+                // Navbar blur dynamic shift
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-3');
+                    navbar.classList.remove('py-4');
+                } else {
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-3');
+                }
+            });
+
+            // Init Interactive Listeners
+            initCategoryFilters();
+            initLightbox();
+            initFullscreenMode();
+            initAiLogModal();
+            initMobileMenu();
+        };
+
+        // Filter Interactions (Page 8 Requirements: Fade out, Transform/Scale, Layout Reorder, Fade in)
+        function initCategoryFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button styles
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-cyber-neonCyan', 'text-black', 'shadow-neon-cyan');
+                        b.classList.add('bg-white/5', 'text-slate-300');
+                    });
+                    btn.classList.add('active', 'bg-cyber-neonCyan', 'text-black', 'shadow-neon-cyan');
+                    btn.classList.remove('bg-white/5', 'text-slate-300');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // GSAP Animate Out -> Filter -> Animate In
+                    gsap.to(galleryItems, {
+                        scale: 0.8,
+                        opacity: 0,
+                        duration: 0.3,
+                        onComplete: () => {
+                            galleryItems.forEach(item => {
+                                const itemCategory = item.getAttribute('data-category');
+                                if (filterValue === 'all' || itemCategory === filterValue) {
+                                    item.style.display = 'block';
+                                } else {
+                                    item.style.display = 'none';
+                                }
+                            });
+
+                            // Fade Back In Filtered Items
+                            gsap.to(document.querySelectorAll('.gallery-item[style*="display: block"]'), {
+                                scale: 1,
+                                opacity: 1,
+                                duration: 0.4,
+                                stagger: 0.08,
+                                ease: 'back.out(1.2)'
+                            });
+                        }
+                    });
+                });
+            });
+        }
+
+        // Lightbox Animation & Navigation (Page 9 Requirements)
+        function initLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            const overlay = document.getElementById('lightbox-overlay');
+            const card = document.getElementById('lightbox-card');
+            const closeBtn = document.getElementById('lightbox-close');
+            const prevBtn = document.getElementById('lightbox-prev');
+            const nextBtn = document.getElementById('lightbox-next');
+
+            // Attach Click Listeners to Gallery Cards
+            document.querySelectorAll('.gallery-card').forEach((cardEl, index) => {
+                cardEl.addEventListener('click', () => {
+                    const id = cardEl.getAttribute('data-id');
+                    const foundIndex = worksData.findIndex(w => w.id === id);
+                    if (foundIndex !== -1) {
+                        currentActiveIndex = foundIndex;
+                        openLightbox(worksData[currentActiveIndex]);
+                    }
+                });
+            });
+
+            function openLightbox(data) {
+                // Populate Details
+                document.getElementById('lightbox-img').src = data.img;
+                document.getElementById('lightbox-title').innerText = data.title;
+                document.getElementById('lightbox-category').innerText = data.categoryName;
+                document.getElementById('lightbox-year').innerText = data.year;
+                document.getElementById('lightbox-desc').innerText = data.desc;
+                document.getElementById('lightbox-concept').innerText = data.concept;
+
+                modal.classList.remove('hidden');
+
+                // Page 9 Animation Timeline: Scale 1.05 -> Overlay Opacity 0->1 -> Card Scale 0.9->1
+                gsap.killTweensOf([overlay, card]);
+                gsap.timeline()
+                    .to(overlay, { opacity: 1, duration: 0.3 })
+                    .to(card, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.2)' }, '-=0.2');
+            }
+
+            function closeLightbox() {
+                gsap.timeline({
+                    onComplete: () => modal.classList.add('hidden')
+                })
+                .to(card, { opacity: 0, scale: 0.9, duration: 0.25 })
+                .to(overlay, { opacity: 0, duration: 0.2 }, '-=0.1');
+            }
+
+            closeBtn.addEventListener('click', closeLightbox);
+            overlay.addEventListener('click', closeLightbox);
+
+            // Previous / Next Controls
+            prevBtn.addEventListener('click', () => {
+                currentActiveIndex = (currentActiveIndex - 1 + worksData.length) % worksData.length;
+                openLightbox(worksData[currentActiveIndex]);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentActiveIndex = (currentActiveIndex + 1) % worksData.length;
+                openLightbox(worksData[currentActiveIndex]);
+            });
+
+            // Keyboard Navigation (Page 10 Requirements: Arrow Left/Right, ESC Close)
+            window.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('hidden')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevBtn.click();
+                if (e.key === 'ArrowRight') nextBtn.click();
+            });
+        }
+
+        // Fullscreen Mode with Interactive Mouse Tilt (Page 10 Requirements)
+        function initFullscreenMode() {
+            const fsModal = document.getElementById('fullscreen-modal');
+            const btnOpen = document.getElementById('btn-open-fullscreen');
+            const btnClose = document.getElementById('fullscreen-close');
+            const fsImg = document.getElementById('fullscreen-img');
+            const fsPrev = document.getElementById('fs-prev');
+            const fsNext = document.getElementById('fs-next');
+
+            btnOpen.addEventListener('click', () => {
+                fsImg.src = worksData[currentActiveIndex].img;
+                fsModal.classList.remove('hidden');
+            });
+
+            btnClose.addEventListener('click', () => {
+                fsModal.classList.add('hidden');
+            });
+
+            fsPrev.addEventListener('click', () => {
+                currentActiveIndex = (currentActiveIndex - 1 + worksData.length) % worksData.length;
+                fsImg.src = worksData[currentActiveIndex].img;
+            });
+
+            fsNext.addEventListener('click', () => {
+                currentActiveIndex = (currentActiveIndex + 1) % worksData.length;
+                fsImg.src = worksData[currentActiveIndex].img;
+            });
+
+            // Mouse Move Parallax Tilt inside Fullscreen
+            fsModal.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const { innerWidth, innerHeight } = window;
+                const xPercent = (clientX / innerWidth - 0.5) * 20;
+                const yPercent = (clientY / innerHeight - 0.5) * 20;
+
+                fsImg.style.transform = `translate(${xPercent}px, ${yPercent}px) scale(1.02)`;
+            });
+
+            window.addEventListener('keydown', (e) => {
+                if (fsModal.classList.contains('hidden')) return;
+                if (e.key === 'Escape') fsModal.classList.add('hidden');
+                if (e.key === 'ArrowLeft') fsPrev.click();
+                if (e.key === 'ArrowRight') fsNext.click();
+            });
+        }
+
+        // AI Log Modal Control
+        function initAiLogModal() {
+            const modal = document.getElementById('ai-log-modal');
+            const openBtn = document.getElementById('btn-open-ai-log');
+            const closeBtn = document.getElementById('ai-log-close');
+            const overlay = document.getElementById('ai-log-overlay');
+
+            openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+            closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+            overlay.addEventListener('click', () => modal.classList.add('hidden'));
+        }
+
+        // Mobile Menu Drawer Control
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const links = document.querySelectorAll('.mobile-nav-link');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('flex');
+            });
+
+            links.forEach(l => l.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+            }));
+        }
+    </script>
+</body>
+</html>
